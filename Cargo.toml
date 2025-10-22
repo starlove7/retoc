@@ -1,10 +1,10 @@
 [package]
 name = "retoc"
-version = "0.1.3"
+version = "0.1.3-beta.1"
 edition = "2024"
-authors = ["trumank", "Archengius"]
-repository = "https://github.com/trumank/retoc"
-homepage = "https://github.com/trumank/retoc"
+authors = ["trumank", "Archengius", "starlove7"]
+repository = "https://github.com/starlove7/retoc"
+homepage = "https://github.com/starlove7/retoc"
 license = "MIT"
 
 [profile.release]
