@@ -123,10 +123,10 @@ fn setup_zen_package_summary(builder: &mut ZenPackageBuilder) -> anyhow::Result<
         custom_versions: builder.legacy_package.summary.versioning_info.custom_versions.clone(),
     };
 
-    // Copy name map from the cooked package up to the number of names referenced by exports
-    // We do not actually need the rest of the name map
-    let name_map_size = builder.legacy_package.summary.names_referenced_from_export_data_count as usize;
-    let name_map_slice = builder.legacy_package.name_map.copy_raw_names()[0..name_map_size].to_vec();
+    // Copy the entire name map from the legacy package to preserve any added entries (like new DataTable rows)
+    // Update the names_referenced_from_export_data_count to reflect the actual number of names
+    let name_map_slice = builder.legacy_package.name_map.copy_raw_names();
+    builder.legacy_package.summary.names_referenced_from_export_data_count = name_map_slice.len() as i32;
     builder.zen_package.name_map = FNameMap::create_from_names(EMappedNameType::Package, name_map_slice);
 
     // Make sure not to attempt to put uncooked packages into zen
